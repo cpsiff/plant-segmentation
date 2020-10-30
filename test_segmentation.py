@@ -10,7 +10,7 @@ DATASET_PATH = "/home/carter/Desktop/CVPPP2017_LSC/training/"
 # Similarly should be link to folder containing A1, A2, A3, A4 folders
 # Output files should be in the same location and have the same name as the ground truth
 # e.g. "DATASET_PATH/A4/plant0441_fg.png" should correspond to test "TEST_DATA_PATH/A4/plant0441_fg.png"
-TEST_DATA_PATH = "/home/carter/Desktop/local_threshold/"
+TEST_DATA_PATH = "/home/carter/Desktop/CVPPP2017_LSC/simple_thresh/"
 
 # Get the partial paths (e.g. A4/plant0574_fg.png) of every image in dataset
 image_paths = [] # Segmentation ground truth (_fg.png)
