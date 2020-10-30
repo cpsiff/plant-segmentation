@@ -12,6 +12,7 @@ DATASET_PATH = "/home/carter/Desktop/CVPPP2017_LSC/training/"
 # e.g. "DATASET_PATH/A4/plant0441_fg.png" should correspond to test "TEST_DATA_PATH/A4/plant0441_fg.png"
 TEST_DATA_PATH = "/home/carter/Desktop/CVPPP2017_LSC/simple_thresh/"
 
+
 def main():
     # Get the partial paths (e.g. A4/plant0574_fg.png) of every image in dataset
     image_paths = [] # Segmentation ground truth (_fg.png)
