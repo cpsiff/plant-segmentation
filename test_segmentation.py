@@ -3,6 +3,7 @@ import os
 from PIL import Image
 import numpy as np
 from sklearn.metrics import jaccard_score
+from datetime import datetime
 
 # Path to CVPPP Dataset "training" folder
 DATASET_PATH = "/home/carter/Desktop/CVPPP2017_LSC/training/"
@@ -10,8 +11,13 @@ DATASET_PATH = "/home/carter/Desktop/CVPPP2017_LSC/training/"
 # Similarly should be link to folder containing A1, A2, A3, A4 folders
 # Output files should be in the same location and have the same name as the ground truth
 # e.g. "DATASET_PATH/A4/plant0441_fg.png" should correspond to test "TEST_DATA_PATH/A4/plant0441_fg.png"
-TEST_DATA_PATH = "/home/carter/Desktop/CVPPP2017_LSC/simple_thresh/"
+TEST_DATA_PATH = "/home/carter/Desktop/CVPPP2017_LSC/green_channel_thresh/"
 
+def write_to_file(scores):
+    with open(TEST_DATA_PATH + "evaluation_results.txt", "w") as file:
+        file.write(datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + "\n")
+        file.write("Mean Jaccard Score: " + str(np.mean(scores)) + "\n \n")
+        file.write(str(scores))
 
 def main():
     # Get the partial paths (e.g. A4/plant0574_fg.png) of every image in dataset
@@ -34,9 +40,7 @@ def main():
         jaccard_scores.append(jaccard_score(ground_truth, test))
         print(img)
 
-    # TODO write scores and average to a file instead of printing to console
-    print(jaccard_scores)
-    print("mean jaccard score", np.mean(jaccard_scores))
+    write_to_file(jaccard_scores)
 
 if __name__ == "__main__":
     main()

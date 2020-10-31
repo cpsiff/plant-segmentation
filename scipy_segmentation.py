@@ -40,6 +40,7 @@ def segment(input_path, method):
         segmented_img = method(img)
         path = path.replace("rgb", "fg") # Change file name to fg from rgb to match ground truth
         io.imsave(output_path + path, segmented_img)
+        print(path)
 
 """
 Simple thresholding based on the value of the green channel
@@ -62,7 +63,7 @@ def local_thresh(img):
 
 
 def main():
-    segment(DATASET_PATH, local_thresh)
+    segment(DATASET_PATH, green_channel_thresh)
 
 if __name__ == "__main__":
     main()
