@@ -11,14 +11,3 @@ Tests the accuracy of segmentation using Jaccard scores. Written for use on CVPP
 
 ### runFluorescentMethod.m
 Performs segmentation according to altered [MultiLeafTracking](https://github.com/xiyinmsu/PlantVision) method on CVPPP2017 dataset. Original method developed for fluorescent imagery and videos.
-
-@article{yin2018joint,
-  title={Joint Multi-Leaf Segmentation, Alignment, and Tracking for Fluorescence Plant Videos},
-  author={Yin, Xi and Liu, Xiaoming and Chen, Jin and Kramer, David M},
-  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  volume={40},
-  number={6},
-  pages={1411--1423},
-  year={2018},
-  publisher={IEEE}
-}
