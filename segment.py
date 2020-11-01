@@ -12,7 +12,7 @@ import os
 DATASET_PATH = "/home/carter/Desktop/CVPPP2017_LSC/"
 
 """
-Segment images in a given dataset path with a given method
+Segment images in a given dataset path with a specified method
 Performs segmentation and outputs results to a folder with the name of the segmentation method
 :param input_path: the path to the dataset to segment, e.g. /home/carter/Desktop/CVPPP2017_LSC/training/
 :param method: the segmentation method to use - should work on a single image. See green_channel_thresh
@@ -45,14 +45,14 @@ def segment(input_path, method):
 """
 Simple thresholding based on the value of the green channel
 :param img: the image to segment
-:retrurn: a binary segmented image
+:return: a binary segmented image
 """
 def green_channel_thresh(img):
     green_channel = img[:,:,1] # get the green channel
     return green_channel > 100 # get pixels where green channel > 100
 
 """
-Local thresholdig using the scipy's build in threshold_local
+Local thresholding using the scipy's built in threshold_local
 :param img: the image to segment
 :return: a binary segmented image
 """
