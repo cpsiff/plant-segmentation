@@ -6,15 +6,15 @@ from sklearn.metrics import jaccard_score
 from datetime import datetime
 
 # Path to CVPPP Dataset "training" folder
-DATASET_PATH = "/home/carter/Desktop/CVPPP2017_LSC/training/"
-# Path to data that we want to test
+GROUND_TRUTH_PATH = "/home/carter/Desktop/CVPPP2017_LSC/training/"
+# Path to data that we want to evaluate
 # Similarly should be link to folder containing A1, A2, A3, A4 folders
 # Output files should be in the same location and have the same name as the ground truth
-# e.g. "DATASET_PATH/A4/plant0441_fg.png" should correspond to test "TEST_DATA_PATH/A4/plant0441_fg.png"
-TEST_DATA_PATH = "/home/carter/Desktop/CVPPP2017_LSC/green_channel_thresh/"
+# e.g. "GROUND_TRUTH_PATH/A4/plant0441_fg.png" should correspond to test "EVAL_DATA_PATH/A4/plant0441_fg.png"
+EVAL_DATA_PATH = "/home/carter/Desktop/CVPPP2017_LSC/green_channel_thresh/"
 
 def write_to_file(scores):
-    with open(TEST_DATA_PATH + "evaluation_results.txt", "w") as file:
+    with open(EVAL_DATA_PATH + "evaluation_results.txt", "w") as file:
         file.write(datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + "\n")
         file.write("Mean Jaccard Score: " + str(np.mean(scores)) + "\n \n")
         file.write(str(scores))
@@ -22,8 +22,8 @@ def write_to_file(scores):
 def main():
     # Get the partial paths (e.g. A4/plant0574_fg.png) of every image in dataset
     image_paths = [] # Segmentation ground truth (_fg.png)
-    for subfolder in os.listdir(DATASET_PATH):
-        for f in os.listdir(DATASET_PATH + subfolder):
+    for subfolder in os.listdir(GROUND_TRUTH_PATH):
+        for f in os.listdir(GROUND_TRUTH_PATH + subfolder):
             if "_fg.png" in f:
                 image_paths.append(subfolder + "/" + f)
 
@@ -31,8 +31,8 @@ def main():
     jaccard_scores = []
     for img in image_paths:
         # read in images as flat numpy array
-        ground_truth = np.array(Image.open(DATASET_PATH + "/" + img)).flatten()
-        test = np.array(Image.open(TEST_DATA_PATH + "/" + img)).flatten()
+        ground_truth = np.array(Image.open(GROUND_TRUTH_PATH + "/" + img)).flatten()
+        test = np.array(Image.open(EVAL_DATA_PATH + "/" + img)).flatten()
         # normalize value to be 0 or 1
         ground_truth = ground_truth/np.max(ground_truth)
         test = test/np.max(test)
