@@ -13,7 +13,7 @@ GROUND_TRUTH_PATH = "/home/carter/Desktop/CVPPP2017_LSC/training/"
 # Similarly should be link to folder containing A1, A2, A3, A4 folders
 # Output files should be in the same location and have the same name as the ground truth
 # e.g. "GROUND_TRUTH_PATH/A4/plant0441_fg.png" should correspond to test "EVAL_DATA_PATH/A4/plant0441_fg.png"
-EVAL_DATA_PATH = "/home/carter/Desktop/CVPPP2017_LSC/logistic_regression/"
+EVAL_DATA_PATH = "/home/carter/Desktop/CVPPP2017_LSC/MLP/"
 
 """
 Write jaccard and f1 scores to file at EVAL_DATA_PATH/evaluation_results.txt

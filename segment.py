@@ -75,6 +75,12 @@ def MLP(img):
     clf = load('MLP.joblib')
     return clf.predict(img).reshape(*shape).astype(np.uint8)
 
+def SVM(img):
+    shape = img[:,:,0].shape
+    img = img[:,:,:3].reshape(-1, 3)
+    clf = load('SVC.joblib')
+    return clf.predict(img).reshape(*shape).astype(np.uint8)
+
 def main():
     segment(DATASET_PATH, MLP)
 
