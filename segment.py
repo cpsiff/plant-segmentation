@@ -7,6 +7,7 @@ import skimage.filters as filters
 import skimage.draw as draw
 import skimage.color as color
 from skimage import io
+from joblib import load
 import os
 
 DATASET_PATH = "/home/carter/Desktop/CVPPP2017_LSC/"
@@ -62,8 +63,15 @@ def local_thresh(img):
     return green_channel > thresh
 
 
+def logistic_regression(img):
+    shape = img[:,:,0].shape
+    img = img[:,:,:3].reshape(-1, 3)
+    clf = load('logistic.joblib')
+    predicted = clf.predict(img).reshape(*shape).astype(np.uint8)
+    return predicted
+
 def main():
-    segment(DATASET_PATH, green_channel_thresh)
+    segment(DATASET_PATH, logistic_regression)
 
 if __name__ == "__main__":
     main()
