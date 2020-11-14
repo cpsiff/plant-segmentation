@@ -67,11 +67,16 @@ def logistic_regression(img):
     shape = img[:,:,0].shape
     img = img[:,:,:3].reshape(-1, 3)
     clf = load('logistic.joblib')
-    predicted = clf.predict(img).reshape(*shape).astype(np.uint8)
-    return predicted
+    return clf.predict(img).reshape(*shape).astype(np.uint8)
+
+def MLP(img):
+    shape = img[:,:,0].shape
+    img = img[:,:,:3].reshape(-1, 3)
+    clf = load('MLP.joblib')
+    return clf.predict(img).reshape(*shape).astype(np.uint8)
 
 def main():
-    segment(DATASET_PATH, logistic_regression)
+    segment(DATASET_PATH, MLP)
 
 if __name__ == "__main__":
     main()

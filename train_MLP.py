@@ -28,10 +28,10 @@ for rgb_path in rgb_paths:
 
     fg_img = io.imread(DATASET_PATH + fg_path)
     y = np.concatenate((y, fg_img.reshape(-1)))
-    print(rgb_path)
 
 # %%
-clf = MLPClassifier(verbose=3).fit(X,y)
+clf = MLPClassifier(verbose=1)
+clf.fit(X[:1000000],y[:1000000])
 
 dump(clf, 'MLP.joblib')
 # %%
