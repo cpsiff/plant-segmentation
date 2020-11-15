@@ -30,8 +30,11 @@ for rgb_path in rgb_paths:
     y = np.concatenate((y, fg_img.reshape(-1)))
 
 # %%
+print("training...")
 clf = MLPClassifier(verbose=1)
-clf.fit(X[:1000000],y[:1000000])
+print("selecting random indexes")
+random_indexes = np.random.choice(y.shape[0], 100000, replace=False)
+clf.fit(X[random_indexes],y[random_indexes])
 
 dump(clf, 'MLP.joblib')
 # %%

@@ -81,8 +81,14 @@ def SVM(img):
     clf = load('SVC.joblib')
     return clf.predict(img).reshape(*shape).astype(np.uint8)
 
+def naive_bayes(img):
+    shape = img[:,:,0].shape
+    img = img[:,:,:3].reshape(-1, 3)
+    clf = load('naive_bayes.joblib')
+    return clf.predict(img).reshape(*shape).astype(np.uint8)
+
 def main():
-    segment(DATASET_PATH, MLP)
+    segment(DATASET_PATH, naive_bayes)
 
 if __name__ == "__main__":
     main()

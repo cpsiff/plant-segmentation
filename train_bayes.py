@@ -1,5 +1,5 @@
 # %%
-from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
 from skimage import io
 from joblib import dump
 import numpy as np
@@ -31,10 +31,10 @@ for rgb_path in rgb_paths:
 
 # %%
 print("training...")
-clf = SVC(verbose=1)
+clf = GaussianNB()
 print("selecting random indexes")
-random_indexes = np.random.choice(y.shape[0], 100000, replace=False)
-clf.fit(X[random_indexes],y[random_indexes])
+#random_indexes = np.random.choice(y.shape[0], 100000, replace=False)
+clf.fit(X,y)
 
-dump(clf, 'SVC.joblib')
+dump(clf, 'naive_bayes.joblib')
 # %%
