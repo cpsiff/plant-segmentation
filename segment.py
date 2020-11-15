@@ -69,18 +69,6 @@ def logistic_regression(img):
     clf = load('logistic.joblib')
     return clf.predict(img).reshape(*shape).astype(np.uint8)
 
-def MLP(img):
-    shape = img[:,:,0].shape
-    img = img[:,:,:3].reshape(-1, 3)
-    clf = load('MLP.joblib')
-    return clf.predict(img).reshape(*shape).astype(np.uint8)
-
-def SVM(img):
-    shape = img[:,:,0].shape
-    img = img[:,:,:3].reshape(-1, 3)
-    clf = load('SVC.joblib')
-    return clf.predict(img).reshape(*shape).astype(np.uint8)
-
 def naive_bayes(img):
     shape = img[:,:,0].shape
     img = img[:,:,:3].reshape(-1, 3)
@@ -88,7 +76,7 @@ def naive_bayes(img):
     return clf.predict(img).reshape(*shape).astype(np.uint8)
 
 def main():
-    segment(DATASET_PATH, naive_bayes)
+    segment(DATASET_PATH, SVM)
 
 if __name__ == "__main__":
     main()
