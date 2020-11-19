@@ -96,6 +96,13 @@ def logistic_and_smooth(img):
     else:
         return prediction.astype(np.uint8)
 
+def logistic_and_edges(img):
+    # detect edges in image (canny?)
+    # detect plant colored pixels with logistic regression
+    # take intersection of two images (to get green edges)
+    # blur??
+    # fill in voids
+    return img
 
 def main():
     segment(DATASET_PATH, logistic_and_smooth)
