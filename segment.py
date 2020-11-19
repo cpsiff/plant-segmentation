@@ -83,8 +83,11 @@ def logistic_and_smooth(img):
     img = img.reshape(-1, 3)
     clf = load('logistic.joblib')
 
+    # get prediction from logistic regression
     prediction = clf.predict(img).reshape(*shape)
 
+    # if there are enough white pixels total, remove small clusters of pixels
+    # otherwise just return the predicted image
     min_size = 1000
     if np.sum(prediction)/255 > min_size*4:
         # Remove clusters of 1 smaller than a given size (1000)
@@ -99,9 +102,9 @@ def logistic_and_smooth(img):
 def logistic_and_edges(img):
     # detect edges in image (canny?)
     # detect plant colored pixels with logistic regression
-    # take intersection of two images (to get green edges)
+    # take intersection of two images (to get edges which are also plant color, presumably)
     # blur??
-    # fill in voids
+    # fill in voids with ndi.binary_fill_holes
     return img
 
 def main():
