@@ -6,6 +6,8 @@ import skimage.segmentation as seg
 import skimage.filters as filters
 import skimage.draw as draw
 import skimage.color as color
+from skimage.util import img_as_ubyte
+from scipy import ndimage as ndi
 from skimage import io
 from joblib import load
 import os
@@ -75,8 +77,28 @@ def naive_bayes(img):
     clf = load('naive_bayes.joblib')
     return clf.predict(img).reshape(*shape).astype(np.uint8)
 
+def logistic_and_smooth(img):
+    shape = img[:,:,0].shape
+    img = filters.gaussian(img[:,:,:3], sigma=2, multichannel=True, preserve_range=True)
+    img = img.reshape(-1, 3)
+    clf = load('logistic.joblib')
+
+    prediction = clf.predict(img).reshape(*shape)
+
+    min_size = 1000
+    if np.sum(prediction)/255 > min_size*4:
+        # Remove clusters of 1 smaller than a given size (1000)
+        label_objects, _ = ndi.label(prediction)
+        sizes = np.bincount(label_objects.ravel())
+        mask_sizes = sizes > min_size
+        mask_sizes[0] = 0
+        return img_as_ubyte(mask_sizes[label_objects])
+    else:
+        return prediction.astype(np.uint8)
+
+
 def main():
-    segment(DATASET_PATH, SVM)
+    segment(DATASET_PATH, logistic_and_smooth)
 
 if __name__ == "__main__":
     main()
