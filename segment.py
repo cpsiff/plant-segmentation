@@ -6,9 +6,11 @@ import skimage.segmentation as seg
 import skimage.filters as filters
 import skimage.draw as draw
 import skimage.color as color
+import cv2
 from skimage.util import img_as_ubyte
 from scipy import ndimage as ndi
 from skimage import io
+from skimage.feature import canny
 from joblib import load
 import os
 
@@ -100,15 +102,37 @@ def logistic_and_smooth(img):
         return prediction.astype(np.uint8)
 
 def logistic_and_edges(img):
-    # detect edges in image (canny?)
+    # detect edges in image (just the green channel?)
+    edges = canny(color.rgb2gray(img[:,:,:3]), sigma=2,) \
+        .astype(np.uint8)
+
     # detect plant colored pixels with logistic regression
+    shape = img[:,:,0].shape
+    img = img[:,:,:3].reshape(-1, 3)
+    clf = load('logistic.joblib')
+    plant_color = clf.predict(img).reshape(*shape).astype(np.uint8)
+
     # take intersection of two images (to get edges which are also plant color, presumably)
+    intersect = cv2.bitwise_and(edges, plant_color)
+
     # blur??
+
+    # dialate edges to make them thicker
+    intersect = ndi.binary_dilation(intersect, iterations=2)
+
+    # remove small patches
+    label_objects, _ = ndi.label(intersect)
+    sizes = np.bincount(label_objects.ravel())
+    mask_sizes = sizes > 300
+    mask_sizes[0] = 0
+    intersect = img_as_ubyte(mask_sizes[label_objects])
+
     # fill in voids with ndi.binary_fill_holes
-    return img
+    holes_filled = ndi.binary_fill_holes(intersect)
+    return holes_filled
 
 def main():
-    segment(DATASET_PATH, logistic_and_smooth)
+    segment(DATASET_PATH, logistic_and_edges)
 
 if __name__ == "__main__":
     main()
