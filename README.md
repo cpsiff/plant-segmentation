@@ -9,5 +9,11 @@ Performs segmentation on an image according to the specified segmentation method
 ### evaluate_segmentation.py
 Tests the accuracy of segmentation using Jaccard score and f1 score. Writes results to a file and saves a histogram of jaccard and f1 score distributions. Written for use on CVPPP2017 dataset, could be adapted to others by changing the way files are read.
 
+### train_bayes.py
+Output to naive_bayes.joblib
+
+### train_logistic.py
+Output to logistic.joblib
+
 ### runFluorescentMethod.m
 Performs segmentation according to altered [MultiLeafTracking](https://github.com/xiyinmsu/PlantVision) method on CVPPP2017 dataset. Original method developed for fluorescent imagery and videos.
