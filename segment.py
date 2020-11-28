@@ -1,18 +1,19 @@
 # %%
-import numpy as np
-import matplotlib.pyplot as plt
-import skimage.data as data
-import skimage.segmentation as seg
-import skimage.filters as filters
-import skimage.draw as draw
-import skimage.color as color
+import os
+
 import cv2
-from skimage.util import img_as_ubyte
+import matplotlib.pyplot as plt
+import numpy as np
+import skimage.color as color
+import skimage.data as data
+import skimage.draw as draw
+import skimage.filters as filters
+import skimage.segmentation as seg
+from joblib import load
 from scipy import ndimage as ndi
 from skimage import io
 from skimage.feature import canny
-from joblib import load
-import os
+from skimage.util import img_as_ubyte
 
 DATASET_PATH = "/home/carter/Desktop/CVPPP2017_LSC/"
 
@@ -131,8 +132,27 @@ def logistic_and_edges(img):
     holes_filled = ndi.binary_fill_holes(intersect)
     return holes_filled
 
+def slic(img):
+    n_segments = 50
+    percent_thresh = 0.5
+
+    img_slic = seg.slic(img[:,:,:3], n_segments=n_segments, start_label=1) # need to mess with parameters
+    img_log = (logistic_regression(img)/255).astype(np.uint8)
+    final_mask = np.zeros(img.shape[:2]).astype(np.uint8)
+
+    for i in range(n_segments):
+        binary_slic = np.where(img_slic==i, 1, 0).astype(np.uint8)
+        percent_green = np.count_nonzero(cv2.bitwise_and(binary_slic, img_log)) / (np.count_nonzero(binary_slic)+1)
+        if percent_green > percent_thresh:
+            final_mask = cv2.bitwise_or(final_mask, binary_slic).astype(np.uint8)
+
+    # img_slic_rgb = color.label2rgb(img_slic, img, kind='avg')
+    # io.imshow(img_slic)
+    # io.show()
+    return final_mask*255
+
 def main():
-    segment(DATASET_PATH, logistic_and_edges)
+    segment(DATASET_PATH, slic)
 
 if __name__ == "__main__":
     main()
