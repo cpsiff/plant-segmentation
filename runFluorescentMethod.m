@@ -22,8 +22,19 @@ for i = 1:num_img
     
     nPlant = 1;
     plantIDs = [1, 1];
-    PlantLocations = [1, 1, dimension_img(1), dimension_img(2)];
-    % PlantLocations = [181, 109, 210, 230];
+    height = dimension_img(1);
+    width = dimension_img(2);
+    
+    % pre-crop image assuming centered
+    crop_ratio = .50;
+    start_height = round(height * (1 - crop_ratio) / 2);
+    end_height = round(height - start_height);
+    start_width = round(width * (1 - crop_ratio) / 2);
+    end_width = round (width - start_width);
+    full_height = end_height - start_height;
+    full_width = end_width - start_width;
+    PlantLocations = [start_height, start_width, full_height, full_width];
+   % PlantLocations = [181, 109, 210, 230];
 
     %% Changes to MultiLeafTracking:
     % altered input arguments of MultiLeafTracking to circumvent creation 
