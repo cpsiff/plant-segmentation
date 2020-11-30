@@ -18,17 +18,24 @@ for i = 1:num_img
     img = imread(Filenames);
     dimension_img = size(img);
 
+    img = im2gray(img);
+    
     nPlant = 1;
     plantIDs = [1, 1];
     PlantLocations = [1, 1, dimension_img(1), dimension_img(2)];
+    % PlantLocations = [181, 109, 210, 230];
 
     %% Changes to MultiLeafTracking:
     % altered input arguments of MultiLeafTracking to circumvent creation 
     % of text file for all images, saving combined mask as fg image.
     %
     % threshold changed from 0.002 to 0.3
-    [combinedMask] = MultiLeafTracking(nPlant, plantIDs, PlantLocations, Filenames);
+  
+    
+    [mask] = MultiLeafTracking(nPlant, plantIDs, PlantLocations, img);
+    % figure, imshow(combinedMask), title('comboMask');
+    
     
     file_name_to_fg = replace(file_names(i, :), "rgb", "fg");
-    save("CVPPP2017_LSC_training/fluorescent_method/A1/" + file_name_to_fg, 'combinedMask');
+    imwrite(logical(mask), "CVPPP2017_LSC_training/fluorescent_method/A1/" + file_name_to_fg);
 end
