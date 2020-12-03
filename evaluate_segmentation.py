@@ -47,12 +47,12 @@ def plot_histogram(jaccard, f1):
     axs[1].set_xlabel("f1 Score")
     fig.savefig(EVAL_DATA_PATH + "eval.png")
 
-# %%
-def main():
+
+def evaluate(ground_truth_path, eval_data_path):
     # Get the partial paths (e.g. A4/plant0574_fg.png) of every image in dataset
     image_paths = [] # Segmentation ground truth (_fg.png)
-    for subfolder in os.listdir(GROUND_TRUTH_PATH):
-        for f in os.listdir(GROUND_TRUTH_PATH + subfolder):
+    for subfolder in os.listdir(ground_truth_path):
+        for f in os.listdir(ground_truth_path + subfolder):
             if "_fg.png" in f:
                 image_paths.append(subfolder + "/" + f)
 
@@ -60,10 +60,10 @@ def main():
     jaccard_scores = []
     f1_scores = []
     for img in image_paths:
-        print(img)
+        print("eval:", img)
         # read in images as flat numpy array
-        ground_truth = np.array(Image.open(GROUND_TRUTH_PATH + "/" + img)).flatten()
-        test = np.array(Image.open(EVAL_DATA_PATH + "/" + img)).flatten()
+        ground_truth = np.array(Image.open(ground_truth_path + "/" + img)).flatten()
+        test = np.array(Image.open(eval_data_path + "/" + img)).flatten()
         # normalize value to be 0 or 1
         ground_truth = ground_truth/np.max(ground_truth)
         test = test/np.max(test)
@@ -73,6 +73,12 @@ def main():
 
     write_to_file(jaccard_scores, f1_scores)
     plot_histogram(jaccard_scores, f1_scores)
+
+    return (jaccard_scores, f1_scores)
+
+# %%
+def main():
+    evaluate(GROUND_TRUTH_PATH, EVAL_DATA_PATH)
 
 if __name__ == "__main__":
     main()
