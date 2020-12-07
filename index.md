@@ -1,5 +1,5 @@
-## Plant Segmentation
-### CS 639 Computer Vision
+## Plant Segmentation Final Project for CS 639 Computer Vision
+### Marianne Bjorner and Carter Sifferman
 
 [Github Repository](https://github.com/cpsiff/plant-segmentation)
 
