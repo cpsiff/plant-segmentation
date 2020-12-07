@@ -1,7 +1,11 @@
+"""
+Fix binary png images so that they're in a consistent binary format
+Used for ground truth (_fg) images which can be saved by some image programs as 8 bit RGB pngs
+rather than binary ones.
+"""
 import cv2
 import os
 import io
-
 
 for img in os.listdir("/home/carter/Desktop/our-data/training/imgs"):
     if "_fg" in img:

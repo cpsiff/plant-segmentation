@@ -1,4 +1,9 @@
-# %%
+"""
+Train a per-pixel logistic regression model to predict whether a pixel belongs to a plant or not
+Uses the rgb values of the pixel
+Trains on each pixel in the given dataset at once
+Save trained classifier to logistic.joblib
+"""
 from sklearn.linear_model import LogisticRegression
 from skimage import io
 from joblib import dump
@@ -6,7 +11,7 @@ import numpy as np
 import os
 import re
 
-DATASET_PATH = "/home/carter/Desktop/CVPPP2017_LSC/training/"
+DATASET_PATH = "/home/carter/Desktop/CVPPP2017_LSC/training/" # dataset to train on
 
 rgb_paths = []
 for subfolder in os.listdir(DATASET_PATH):
@@ -30,8 +35,6 @@ for rgb_path in rgb_paths:
     y = np.concatenate((y, fg_img.reshape(-1)))
     print(rgb_path)
 
-# %%
-clf = LogisticRegression(verbose=3).fit(X,y)
+clf = LogisticRegression(verbose=3).fit(X,y) # fit sklearn logistic regression model
 
-dump(clf, 'logistic.joblib')
-# %%
+dump(clf, 'logistic.joblib') # save trained model to file

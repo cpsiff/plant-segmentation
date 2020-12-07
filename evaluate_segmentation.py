@@ -1,4 +1,8 @@
-# %%
+"""
+Tests the accuracy of segmentation using Jaccard score and f1 score
+Writes results to a file and saves a histogram of jaccard and f1 score distributions
+Written for use on CVPPP2017 dataset, works on any dataset with the same file structure
+"""
 import os
 from PIL import Image
 import numpy as np
@@ -10,7 +14,7 @@ import matplotlib.pyplot as plt
 # Path to CVPPP Dataset "training" folder
 GROUND_TRUTH_PATH = "/home/carter/Desktop/CVPPP2017_LSC/training/"
 # Path to data that we want to evaluate
-# Similarly should be link to folder containing A1, A2, A3, A4 folders
+# Similarly should be path to folder containing A1, A2, A3, A4... subfolders
 # Output files should be in the same location and have the same name as the ground truth
 # e.g. "GROUND_TRUTH_PATH/A4/plant0441_fg.png" should correspond to test "EVAL_DATA_PATH/A4/plant0441_fg.png"
 EVAL_DATA_PATH = "/home/carter/Desktop/CVPPP2017_LSC/logistic_and_smooth/"
@@ -47,7 +51,14 @@ def plot_histogram(jaccard, f1):
     axs[1].set_xlabel("f1 Score")
     fig.savefig(EVAL_DATA_PATH + "eval.png")
 
-
+"""
+Run the evaluation, write resulting jaccard and f1 scores to a file and save histogram
+of scores to file. 
+Scores are saved to eval_data_path/evaluation_results.txt
+Histogram is saved to eval_data_path/eval.png
+:param ground_truth_path: path to the ground truth folders (GROUND_TRUTH_PATH global when running directly)
+:param eval_data_path: path to the eval folders (EVAL_DATA_PATH global when running direcly)
+"""
 def evaluate(ground_truth_path, eval_data_path):
     # Get the partial paths (e.g. A4/plant0574_fg.png) of every image in dataset
     image_paths = [] # Segmentation ground truth (_fg.png)
@@ -76,10 +87,8 @@ def evaluate(ground_truth_path, eval_data_path):
 
     return (jaccard_scores, f1_scores)
 
-# %%
 def main():
     evaluate(GROUND_TRUTH_PATH, EVAL_DATA_PATH)
 
 if __name__ == "__main__":
     main()
-# %%

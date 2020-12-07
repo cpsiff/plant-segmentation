@@ -1,3 +1,7 @@
+"""
+Tune the parameters of the logistic_and_smooth method in segment.py to get the best jaccard score
+Results are saved in DATASET_PATH/logistic_and_smooth/optimization.txt
+"""
 import evaluate_segmentation
 import segment
 import numpy as np
