@@ -3,15 +3,34 @@
 
 [Github Repository](https://github.com/cpsiff/plant-segmentation)
 
-[Project Proposal](?)
+[Project Proposal](proposal.pdf)
 
-[Midterm Report](?)
+[Midterm Report](midterm.pdf)
 
-[Final Report](?)
+[Final Presentation](https://docs.google.com/presentation/d/1-RsaTUuVwnlHyvxS62lsLEATcr5Wvde78qQSAqw-udw/edit?usp=sharing)
 
+[CVPPP2017 LSC Dataset](https://www.plant-phenotyping.org/datasets-home)
 
-Datasets:
+[Our Dataset](https://drive.google.com/drive/u/1/folders/1o7BMx_QDEMyHjWjvAFRqM-y4dL1PQiQE)
 
-[CVPPP2017 LSC](https://www.plant-phenotyping.org/datasets-home)
+## Introduction
 
-[Self-collected, hosted on google drive](https://drive.google.com/drive/u/1/folders/1o7BMx_QDEMyHjWjvAFRqM-y4dL1PQiQE)
+## Related Work
+
+## Goals
+
+## CVPPP2017 Dataset
+
+## Our Dataset
+
+## Our Segmentation Approaches
+
+### Green Channel Thresholding
+
+### Per-Pixel Logistic Regression
+
+### Smoothed and Denoised Per-Pixel Regression
+
+## Results
+
+## Conclusion
