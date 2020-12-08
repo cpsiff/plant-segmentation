@@ -23,7 +23,7 @@
 
 ## [CVPPP2017 Dataset](https://www.plant-phenotyping.org/datasets-home)
 
-The CVPPP2017 Dataset is a collection of overhead images of [Arabidopsis](https://elifesciences.org/articles/06100) and Tobacco plants, which are both leafy, green [dicotyledons](https://en.wikipedia.org/wiki/Dicotyledon) and have a [rosette structure](https://en.wikipedia.org/wiki/Rosette_(botany), meaning they grow in a circular pattern. Because of these features, the CVPPP dataset is not variable, and would be insufficient to test the broader applicability of phenotyping algorithms. 
+The CVPPP2017 Dataset is a collection of overhead images of [Arabidopsis](https://elifesciences.org/articles/06100) and Tobacco plants, which are both leafy, green [dicotyledons](https://en.wikipedia.org/wiki/Dicotyledon) and have a [rosette structure](https://en.wikipedia.org/wiki/Rosette_(botany)), meaning they grow in a circular pattern. Because of these features, the CVPPP dataset is not variable, and would be insufficient to test the broader applicability of phenotyping algorithms. 
 
 ## [Our Dataset](https://drive.google.com/drive/u/1/folders/1o7BMx_QDEMyHjWjvAFRqM-y4dL1PQiQE)
 
@@ -40,7 +40,7 @@ This vacuum in available plant image data led us to develop our own dataset comp
   - Backgrounds with Leaves not belonging to the plant
   - Backgrounds with other variation
   
-This dataset is comprised of 68 overhead plant images as well as their annotated binary mask counterparts. Binary masks created with [Photoshop](https://en.wikipedia.org/wiki/Adobe_Photoshop) and [GIMP](https://en.wikipedia.org/wiki/GIMP).
+This dataset is comprised of 68 overhead plant images as well as their annotated binary mask counterparts. Binary masks created with [Photoshop](https://en.wikipedia.org/wiki/Adobe_Photoshop) and [GIMP](https://en.wikipedia.org/wiki/GIMP). Each is 500x500 pixels, and a [tags.json](https://drive.google.com/drive/u/1/folders/1o7BMx_QDEMyHjWjvAFRqM-y4dL1PQiQE) file to differentiate plant and image features, useful for testing an algortihm against a subset of image categories.
 
 ## Implementing Existing Algorithms
 
@@ -56,28 +56,74 @@ Because this was developed for fluorescent images of plants, RGB inputs of image
 
 These changes are reflected in both the [image input](https://github.com/cpsiff/plant-segmentation/blob/main/runFluorescentMethod.m) and [entrance file](https://github.com/cpsiff/plant-segmentation/blob/main/MultiLeafTracking.m) of the original [PlantVision](https://github.com/xiyinmsu/PlantVision) algorithm.
 
-
-## Our Segmentation Approaches
+## [Our Segmentation Approaches](https://github.com/cpsiff/plant-segmentation/blob/main/segment.py)
 
 ### Green Channel Thresholding
 
+A green channel tresholding algorithm was implemented as a baseline. This approach rests on the assumption that - hey! plants are green! - and therefore images of plants can be separated based on how green these pixels are.
+
+--success photo--
+
 #### Difficulties Encountered / Caveats
+
+Many obvious pitfalls occur when classifying leaves with just RGB values. This approach fails readily. Green backgrounds and bright colors result in false positives.
+
+--failure photo-- 
 
 ### K-means Clustering
 
+K-means Clustering creates a set of k clusters of datapoints, or in this case pixels, which minimizes the within-cluster variance of the clusters in an iterative fashion until convergence is reached.  
+
+--success photo--
+
 #### Difficulties Encountered / Caveats
+
+Due to its reliance on RGB values of pixels, as k increases, it approximates the per-pixel logistic regression method.
+
+--failure photo--
 
 ### Per-Pixel Logistic Regression
 
+--success photo--
+
 #### Difficulties Encountered / Caveats
+
+lots of noise.
+
+--failure photo--
 
 ### Smoothed and Denoised Per-Pixel Regression
 
+To address the noise in resulting masks of the per-pixel logistic regression, binary masks were post-processed in an attempt to remove background noise through
+???
+
 #### Difficulties Encountered / Caveats
+
+In some cases, smoothing and denoising resulted in strange artifacts which would occur when.... ???
+
+-- failure photo --
 
 ## Results
 
-## Conclusion
+We analyzed our results by assigning a [Jaccard Index](https://en.wikipedia.org/wiki/Jaccard_index) to each image. The Jaccard Index, also known as intersection over union, compares the binary mask output of each algorithm and compares them to the ground truth masks. 
+
+Calculations of Jaccard Index and Dice Coefficient driven by [evalutate_segmentation.py](https://github.com/cpsiff/plant-segmentation/blob/main/evaluate_segmentation.py)
+
+---------- put a table of overall results ----------
+
+### Green Treshold
+-- image of gt stats --
+
+### K-means Clustering
+-- image of kmc stats --
+
+### Per-Pixel Regression
+-- image of ppr stats --
+
+### Smoothed and Denoised Per-Pixel Regression
+-- image of sdppr stats --
+
+## Conclusion / Future Work
 
 ## References
 
@@ -86,15 +132,3 @@ These changes are reflected in both the [image input](https://github.com/cpsiff/
 [2](https://ieeexplore.ieee.org/document/7982753) Yin X, Liu X, Chen J, and Kramer DM. <i>Joint Multi-Leaf Segmentation, Alignment, and Tracking for Fluorescence Plant Videos</i>. 2018. IEEE Transactions on Pattern Analysis and Machine Intelligence.
 
 [3](https://github.com/xiyinmsu/PlantVision) Original PlantVision code posted to Github.
-
-
-
-
-
-
-
-
-
-
-
-
