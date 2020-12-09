@@ -1,21 +1,45 @@
 ## Plant Segmentation Final Project for CS 639 Computer Vision
 ### Marianne Bjorner and Carter Sifferman
 
+[Github Repository](https://github.com/cpsiff/plant-segmentation) / [Project Proposal](proposal.pdf) / [Midterm Report](midterm.pdf)
+
 ## Introduction
 
-- TODO: talk abt probs in plant phenotyping
+Plant [Phenotyping](https://en.wikipedia.org/wiki/Phenotype) 
+
+....
+
+...
+
+..
 
 ### Motivation
 
-- TODO: Plant phenotyping
+Current methods used to assess plant growth in botany experiments are time-consuming and laborious. Using image segmentation techniques to replace manual plant measurements would increase automation and decrease needs for destructive sampling, thus decreasing cost.
+
+Of those algorithms available, many have been developed and tested on datasets available from the European Conference on Computer Vision's [(ECCV)](https://eccv2020.eu/) workshop on Computer Vision Problems in Plant Phenotyping [(CVPPP)](https://www.plant-phenotyping.org/CVPPP2020). The dataset comprises overhead images of two species (of genera Arabidopsis and Nicotiana), commonly used as model organisms for botany and horticulture experiments. Given this limited dataset, we wanted to expand the range of available plant and image types to evaluate the differential performance of segmentation algorithms.
+
+### Goals
+
+- Implement image segmentation algorithm(s) on overhead images of seedlings and smaller, vegetative plants,
+- Develop a dataset of variable plant images,
+- Evaluate methods of existing segmentation algorithms,
+- Create our own segmentation algorithms, and
+- Compare performance of different plant-background segmentation algorithms.
 
 ## Related Work
 
-- TODO: talk abt existing approaches to cvppp2017:
+Existing approaches to the plant and leaf segmentation problem proposed by CVPPP include:
 
-## Goals
+- 
+-
+-
 
-- TODO: talk abt what we hope to get out of it... from this we can set our conclusions and future work
+Outside the realm of CVPPP, plant segmentation has also been explored in the context of plant identification.
+
+-
+-
+-
 
 ## [CVPPP2017 Dataset](https://www.plant-phenotyping.org/datasets-home)
 
@@ -36,7 +60,7 @@ This vacuum in available plant image data led us to develop our own dataset comp
   - Backgrounds with Leaves not belonging to the plant
   - Backgrounds with other variation
   
-This dataset is comprised of 68 overhead plant images as well as their annotated binary mask counterparts. Binary masks created with [Photoshop](https://en.wikipedia.org/wiki/Adobe_Photoshop) and [GIMP](https://en.wikipedia.org/wiki/GIMP). Each is 500x500 pixels, and a [tags.json](https://drive.google.com/drive/u/1/folders/1o7BMx_QDEMyHjWjvAFRqM-y4dL1PQiQE) file to differentiate plant and image features, useful for testing an algortihm against a subset of image categories.
+This dataset is comprised of 68 overhead plant images as well as their annotated binary mask counterparts. Binary masks created with [Photoshop](https://en.wikipedia.org/wiki/Adobe_Photoshop) and [GIMP](https://en.wikipedia.org/wiki/GIMP). Each is 500x500 pixels, and a [tags.json](https://drive.google.com/drive/u/1/folders/1o7BMx_QDEMyHjWjvAFRqM-y4dL1PQiQE) file is included to differentiate plant and image features, useful for testing an algorithm against a subset of image categories.
 
 ## Implementing Existing Algorithms
 
@@ -64,9 +88,7 @@ A green channel tresholding algorithm was implemented as a baseline. This approa
 
 #### Difficulties Encountered / Caveats
 
-Many obvious pitfalls occur when classifying leaves with just RGB values. This approach fails readily. Green backgrounds and bright colors result in false positives.
-
-- TODO: add failure photo 
+Many obvious pitfalls occur when classifying leaves solely using a single green channel's values. This approach fails readily. Green backgrounds and bright colors result in false positives. Additionally, this approach does not work on images of non-green plants.
 
 ### K-means Clustering
 
@@ -127,7 +149,17 @@ Calculations of Jaccard Index and Dice Coefficient driven by [evalutate_segmenta
 
 ## Conclusions / Future Work
 
-TODO: talk about future conclusions as it relates to our goals
+Our methods focus on a pixel-by-pixel classification to segment plants from their background. This can be extended and refined through additional input image manipulation and binary mask refinement. However, it is important to aknowledge that as the parameters increase, so does the performance of a segmentation. These could include how well a leaf matches a template, angle between leaves, or distance between leaves in order to filter for true and false positives. While the present algorithm could easily be extended to track phenotypes related to size and green-ness of the plant [(a proxy for health and chlorophyll content)](https://www.tandfonline.com/doi/pdf/10.1626/pps.15.293), another datapoint of interest is also leaf number. With such additional parameters, individual leaf segmentation and tracking would also be possible. 
+
+The current state-of-the-art includes high-performing algorithms that commonly fall above a Jaccard Index of 0.95. These utilize a...
+
+????
+
+Of course, there are many other ways to approach this problem, such as through template matching, object recognition
+- using feature detection methods
+  - e.g. SIFT, blob detection with LoG and affine adaptations?
+- implement other algorithms:
+  - CNN
 
 ## References
 
