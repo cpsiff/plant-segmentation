@@ -62,7 +62,10 @@ These changes are reflected in both the [image input](https://github.com/cpsiff/
 
 A green channel tresholding algorithm was implemented as a baseline. This approach rests on the assumption that - hey! plants are green! - and therefore images of plants can be separated based on how green these pixels are.
 
---success photo--
+| RGB image | Ground Truth Binary Mask | Green Threshold Result |
+| :---: | :---: | :---: |
+| <img src="photos/green_threshold/plant018_rgb.png" alt="rgb image from CVPPP2017 dataset, A018" width="150"/> | <img src="photos/green_threshold/plant018_fg.png" alt="fg image from CVPPP2017 dataset, A018" width="150"/> | <img src="photos/green_threshold/018_green_thresh.png" alt="output of mask following the green threshold algorithm" width="150"/> |
+
 
 #### Difficulties Encountered / Caveats
 
@@ -74,7 +77,9 @@ Many obvious pitfalls occur when classifying leaves with just RGB values. This a
 
 K-means Clustering creates a set of k clusters of datapoints, or in this case pixels, which minimizes the within-cluster variance of the clusters in an iterative fashion until convergence is reached.  
 
---success photo--
+| RGB image | Ground Truth Binary Mask | Intermediate Result | K-Means Clustering Result |
+| :---: | :---: | :---: | :---: |
+| <img src="photos/k-means/plant0418_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 0418" width="150"/> | <img src="photos/k-means/plant0418_fg.png" alt="fg image from CVPPP2017 dataset, ID 0418" width="150"/> | <img src="photos/k-means/0418.png" alt="intermediate results of the k-means clustering algorithm" width="150"/> | <img src="photos/k-means/plant0418_kmc.png" alt="binary mask results of the k-means clustering algorithm" width="150"/> |
 
 #### Difficulties Encountered / Caveats
 
@@ -84,22 +89,29 @@ Due to its reliance on RGB values of pixels, as k increases, it approximates the
 
 ### Per-Pixel Logistic Regression
 
---success photo--
+| RGB image | Ground Truth Binary Mask | Per-Pixel Logistic Regression |
+| :---: | :---: | :---: |
+| <img src="photos/per_pixel/plant0418_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 0418" width="150"/> | <img src="photos/per_pixel/plant0418_fg.png" alt="fg image from CVPPP2017 dataset, ID 0418" width="150"/> | <img src="photos/per_pixel/0418_logistic.png" alt="binary mask result of the per pixel logistic regression" width="150"/> |
 
 #### Difficulties Encountered / Caveats
 
-lots of noise.
+Some photos had background noise, where false positives were recovered in the soil surrounding the plant.
 
---failure photo--
+| RGB image | Ground Truth Binary Mask | Per-Pixel Logistic Regression |
+| :---: | :---: | :---: |
+| <img src="photos/per_pixel/plant020_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 020" width="150"/> | <img src="photos/per_pixel/plant020_fg.png" alt="fg image from CVPPP2017 dataset, ID 020" width="150"/> | <img src="photos/per_pixel/020_logistic.png" alt="binary mask result of the per pixel logistic regression" width="150"/> |
 
 ### Smoothed and Denoised Per-Pixel Regression
 
-To address the noise in resulting masks of the per-pixel logistic regression, binary masks were post-processed in an attempt to remove background noise through
-???
+To address the noise in resulting masks of the per-pixel logistic regression, binary masks were post-processed in an attempt to remove background noise.
+
+| RGB image | Ground Truth Binary Mask | Smoothed and Denoised Per-Pixel Logistic Regression |
+| :---: | :---: | :---: |
+| <img src="photos/per_pixel_denoise_smooth/plant0418_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 0418" width="150"/> | <img src="photos/per_pixel/plant0418_fg.png" alt="fg image from CVPPP2017 dataset, ID 0418" width="150"/> | <img src="photos/per_pixel_denoise_smooth/0418_log_smooth.png" alt="binary mask result of the smoothed and denoised per pixel logistic regression" width="150"/> |
 
 #### Difficulties Encountered / Caveats
 
-In some cases, smoothing and denoising resulted in strange artifacts which would occur when.... ???
+In some cases, smoothing and denoising resulted in strange artifacts.
 
 -- failure photo --
 
@@ -111,21 +123,14 @@ Calculations of Jaccard Index and Dice Coefficient driven by [evalutate_segmenta
 
 ### Jaccard Index by Method and Dataset
 
-| Method | CVPPP2017 | Our Dataset|
+| Method | CVPPP2017* | Our Dataset|
 | --- | --- | --- |
-| Green Threshold | 0.31 | 0.32 |
-| Per-Pixel Regression | 0.75 | 0.56 |
-| Per-Pixel Regression + Smooth | 0.85 | 0.66 |
-| K-Means Clustering | 0.73 | 0.45 |
+| Green Threshold | [0.31](photos/green_threshold/graph.png) | 0.32 |
+| Per-Pixel Regression | [0.75](photos/per_pixel/graph.png) | 0.56 |
+| Per-Pixel Regression + Smooth | [0.85](photos/per_pixel_denoise_smooth/graph.png) | 0.66 |
+| K-Means Clustering | [0.73](photos/k-means/graph.png) | 0.45 |
 
-### CVPPP2017 Jaccard Index Result Graphs
-
-| Method | Graph |
-| ------ | ----- |
-| Green Threshold | [0.31](photos/green_threshold/graph.png) | 
-| Per-Pixel Regression | [0.75](photos/per_pixel/graph.png) | 
-| Per-Pixel Regression + Smooth | [0.85](photos/per_pixel_denoise_smooth/graph.png) | 
-| K-Means Clustering | [0.73](photos/k-means/graph.png) |
+<sup>* Links lead to result graphs </sup>
 
 ## Conclusions / Future Work
 
