@@ -1,25 +1,21 @@
 ## Plant Segmentation Final Project for CS 639 Computer Vision
 ### Marianne Bjorner and Carter Sifferman
 
-[Github Repository](https://github.com/cpsiff/plant-segmentation)
-
-[Project Proposal](proposal.pdf)
-
-[Midterm Report](midterm.pdf)
-
-[Final Presentation](https://docs.google.com/presentation/d/1-RsaTUuVwnlHyvxS62lsLEATcr5Wvde78qQSAqw-udw/edit?usp=sharing)
-
-[CVPPP2017 LSC Dataset](https://www.plant-phenotyping.org/datasets-home)
-
-[Our Dataset](https://drive.google.com/drive/u/1/folders/1o7BMx_QDEMyHjWjvAFRqM-y4dL1PQiQE)
-
 ## Introduction
+
+- TODO: talk abt probs in plant phenotyping
 
 ### Motivation
 
+- TODO: Plant phenotyping
+
 ## Related Work
 
+- TODO: talk abt existing approaches to cvppp2017:
+
 ## Goals
+
+- TODO: talk abt what we hope to get out of it... from this we can set our conclusions and future work
 
 ## [CVPPP2017 Dataset](https://www.plant-phenotyping.org/datasets-home)
 
@@ -64,14 +60,13 @@ A green channel tresholding algorithm was implemented as a baseline. This approa
 
 | RGB image | Ground Truth Binary Mask | Green Threshold Result |
 | :---: | :---: | :---: |
-| <img src="photos/green_threshold/plant018_rgb.png" alt="rgb image from CVPPP2017 dataset, A018" width="150"/> | <img src="photos/green_threshold/plant018_fg.png" alt="fg image from CVPPP2017 dataset, A018" width="150"/> | <img src="photos/green_threshold/018_green_thresh.png" alt="output of mask following the green threshold algorithm" width="150"/> |
-
+| <img src="photos/green_threshold/plant018_rgb.png" alt="rgb image from CVPPP2017 dataset, A018" width="200"/> | <img src="photos/green_threshold/plant018_fg.png" alt="fg image from CVPPP2017 dataset, A018" width="200"/> | <img src="photos/green_threshold/018_green_thresh.png" alt="output of mask following the green threshold algorithm" width="200"/> |
 
 #### Difficulties Encountered / Caveats
 
 Many obvious pitfalls occur when classifying leaves with just RGB values. This approach fails readily. Green backgrounds and bright colors result in false positives.
 
---failure photo-- 
+- TODO: add failure photo 
 
 ### K-means Clustering
 
@@ -79,19 +74,17 @@ K-means Clustering creates a set of k clusters of datapoints, or in this case pi
 
 | RGB image | Ground Truth Binary Mask | Intermediate Result | K-Means Clustering Result |
 | :---: | :---: | :---: | :---: |
-| <img src="photos/k-means/plant0418_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 0418" width="150"/> | <img src="photos/k-means/plant0418_fg.png" alt="fg image from CVPPP2017 dataset, ID 0418" width="150"/> | <img src="photos/k-means/0418.png" alt="intermediate results of the k-means clustering algorithm" width="150"/> | <img src="photos/k-means/plant0418_kmc.png" alt="binary mask results of the k-means clustering algorithm" width="150"/> |
+| <img src="photos/k-means/plant0418_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 0418" width="200"/> | <img src="photos/k-means/plant0418_fg.png" alt="fg image from CVPPP2017 dataset, ID 0418" width="200"/> | <img src="photos/k-means/0418.png" alt="intermediate results of the k-means clustering algorithm" width="200"/> | <img src="photos/k-means/plant0418_kmc.png" alt="binary mask results of the k-means clustering algorithm" width="200"/> |
 
 #### Difficulties Encountered / Caveats
 
 Due to its reliance on RGB values of pixels, as k increases, it approximates the per-pixel logistic regression method.
 
---failure photo--
-
 ### Per-Pixel Logistic Regression
 
 | RGB image | Ground Truth Binary Mask | Per-Pixel Logistic Regression |
 | :---: | :---: | :---: |
-| <img src="photos/per_pixel/plant0418_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 0418" width="150"/> | <img src="photos/per_pixel/plant0418_fg.png" alt="fg image from CVPPP2017 dataset, ID 0418" width="150"/> | <img src="photos/per_pixel/0418_logistic.png" alt="binary mask result of the per pixel logistic regression" width="150"/> |
+| <img src="photos/per_pixel/plant0418_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 0418" width="200"/> | <img src="photos/per_pixel/plant0418_fg.png" alt="fg image from CVPPP2017 dataset, ID 0418" width="200"/> | <img src="photos/per_pixel/0418_logistic.png" alt="binary mask result of the per pixel logistic regression" width="200"/> |
 
 #### Difficulties Encountered / Caveats
 
@@ -99,7 +92,7 @@ Some photos had background noise, where false positives were recovered in the so
 
 | RGB image | Ground Truth Binary Mask | Per-Pixel Logistic Regression |
 | :---: | :---: | :---: |
-| <img src="photos/per_pixel/plant020_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 020" width="150"/> | <img src="photos/per_pixel/plant020_fg.png" alt="fg image from CVPPP2017 dataset, ID 020" width="150"/> | <img src="photos/per_pixel/020_logistic.png" alt="binary mask result of the per pixel logistic regression" width="150"/> |
+| <img src="photos/per_pixel/plant020_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 020" width="200"/> | <img src="photos/per_pixel/plant020_fg.png" alt="fg image from CVPPP2017 dataset, ID 020" width="200"/> | <img src="photos/per_pixel/020_logistic.png" alt="binary mask result of the per pixel logistic regression" width="200"/> |
 
 ### Smoothed and Denoised Per-Pixel Regression
 
@@ -107,7 +100,7 @@ To address the noise in resulting masks of the per-pixel logistic regression, bi
 
 | RGB image | Ground Truth Binary Mask | Smoothed and Denoised Per-Pixel Logistic Regression |
 | :---: | :---: | :---: |
-| <img src="photos/per_pixel_denoise_smooth/plant0418_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 0418" width="150"/> | <img src="photos/per_pixel/plant0418_fg.png" alt="fg image from CVPPP2017 dataset, ID 0418" width="150"/> | <img src="photos/per_pixel_denoise_smooth/0418_log_smooth.png" alt="binary mask result of the smoothed and denoised per pixel logistic regression" width="150"/> |
+| <img src="photos/per_pixel_denoise_smooth/plant0418_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 0418" width="200"/> | <img src="photos/per_pixel/plant0418_fg.png" alt="fg image from CVPPP2017 dataset, ID 0418" width="200"/> | <img src="photos/per_pixel_denoise_smooth/0418_log_smooth.png" alt="binary mask result of the smoothed and denoised per pixel logistic regression" width="200"/> |
 
 #### Difficulties Encountered / Caveats
 
@@ -134,7 +127,7 @@ Calculations of Jaccard Index and Dice Coefficient driven by [evalutate_segmenta
 
 ## Conclusions / Future Work
 
-
+TODO: talk about future conclusions as it relates to our goals
 
 ## References
 
@@ -143,3 +136,15 @@ Calculations of Jaccard Index and Dice Coefficient driven by [evalutate_segmenta
 [2](https://ieeexplore.ieee.org/document/7982753) Yin X, Liu X, Chen J, and Kramer DM. <i>Joint Multi-Leaf Segmentation, Alignment, and Tracking for Fluorescence Plant Videos</i>. 2018. IEEE Transactions on Pattern Analysis and Machine Intelligence.
 
 [3](https://github.com/xiyinmsu/PlantVision) Original PlantVision code posted to Github.
+
+[Github Repository](https://github.com/cpsiff/plant-segmentation)
+
+[Project Proposal](proposal.pdf)
+
+[Midterm Report](midterm.pdf)
+
+[Final Presentation](https://docs.google.com/presentation/d/1-RsaTUuVwnlHyvxS62lsLEATcr5Wvde78qQSAqw-udw/edit?usp=sharing)
+
+[CVPPP2017 LSC Dataset](https://www.plant-phenotyping.org/datasets-home)
+
+[Our Dataset](https://drive.google.com/drive/u/1/folders/1o7BMx_QDEMyHjWjvAFRqM-y4dL1PQiQE)
