@@ -137,6 +137,8 @@ TODO: talk about future conclusions as it relates to our goals
 
 [3](https://github.com/xiyinmsu/PlantVision) Original PlantVision code posted to Github.
 
+[4](https://openaccess.thecvf.com/content_CVPRW_2019/papers/CVPPP/Kuznichov_Data_Augmentation_for_Leaf_Segmentation_and_Counting_Tasks_in_Rosette_CVPRW_2019_paper.pdf) Kuznichov et. al. 2019
+
 [Github Repository](https://github.com/cpsiff/plant-segmentation)
 
 [Project Proposal](proposal.pdf)
