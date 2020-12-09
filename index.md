@@ -121,6 +121,7 @@ Calculations of Jaccard Index and Dice Coefficient driven by [evalutate_segmenta
 ### CVPPP2017 Jaccard Index Result Graphs
 
 | Method | Graph |
+| ------ | ----- |
 | Green Threshold | [0.31](photos/green_threshold/graph.png) | 
 | Per-Pixel Regression | [0.75](photos/per_pixel/graph.png) | 
 | Per-Pixel Regression + Smooth | [0.85](photos/per_pixel_denoise_smooth/graph.png) | 
