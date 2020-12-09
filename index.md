@@ -109,19 +109,22 @@ We analyzed our results by assigning a [Jaccard Index](https://en.wikipedia.org/
 
 Calculations of Jaccard Index and Dice Coefficient driven by [evalutate_segmentation.py](https://github.com/cpsiff/plant-segmentation/blob/main/evaluate_segmentation.py)
 
----------- put a table of overall results ----------
+### Jaccard Index by Method and Dataset
 
-### Green Treshold
--- image of gt stats --
+| Method | CVPPP2017 | Our Dataset|
+| --- | --- | --- |
+| Green Threshold | 0.31 | 0.32 |
+| Per-Pixel Regression | 0.75 | 0.56 |
+| Per-Pixel Regression + Smooth | 0.85 | 0.66 |
+| K-means | 0.73 | 0.45 |
 
-### K-means Clustering
--- image of kmc stats --
+### CVPPP2017 Jaccard Index Result Graphs
 
-### Per-Pixel Regression
--- image of ppr stats --
-
-### Smoothed and Denoised Per-Pixel Regression
--- image of sdppr stats --
+| Method | Graph |
+| Green Threshold | [0.31](photos/green_threshold/graph.png) | 
+| Per-Pixel Regression | [0.75](photos/per_pixel/graph.png) | 
+| Per-Pixel Regression + Smooth | [0.85](photos/per_pixel_denoise_smooth/graph.png) | 
+| K-means | [0.73](photos/k-means/graph.png) |
 
 ## Conclusion / Future Work
 
