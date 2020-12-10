@@ -91,6 +91,12 @@ Due to its reliance on RGB values of pixels, as k increases, it approximates the
 
 ### Per-Pixel Logistic Regression
 
+Python package sklearn's LinearRegression tool was used to train a model on CVPPP2017 data. It recovered the following equation:
+
+<img src="photos/per_pixel/equation.png" alt="logistic regression equation recovered" width="700"/> 
+
+These also use the values of the RGB channels, applying a negative weight to red and blue channels, and a positive weight to the green channel. If the pixel meets a threshold, it is classified as a plant pixel; background otherwise.
+
 | RGB image | Ground Truth Binary Mask | Per-Pixel Logistic Regression |
 | :---: | :---: | :---: |
 | <img src="photos/per_pixel/plant0418_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 0418" width="200"/> | <img src="photos/per_pixel/plant0418_fg.png" alt="fg image from CVPPP2017 dataset, ID 0418" width="200"/> | <img src="photos/per_pixel/0418_logistic.png" alt="binary mask result of the per pixel logistic regression" width="200"/> |
