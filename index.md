@@ -2,7 +2,7 @@
 ### Marianne Bjorner and Carter Sifferman
 
 [Github Repository](https://github.com/cpsiff/plant-segmentation) / [Project Proposal](proposal.pdf) / [Midterm Report](midterm.pdf) / 
-[Final Presentation](https://docs.google.com/presentation/d/1-RsaTUuVwnlHyvxS62lsLEATcr5Wvde78qQSAqw-udw/edit?usp=sharing)
+[Final Presentation](https://docs.google.com/presentation/d/1-RsaTUuVwnlHyvxS62lsLEATcr5Wvde78qQSAqw-udw/edit?usp=sharing) / [Final Presentation Video](https://www.youtube.com/watch?v=nfIE1cJPkbA&ab_channel=CarterSifferman)
 
 ## Introduction / Motivation
 
@@ -146,13 +146,27 @@ The current state-of-the-art includes high-performing algorithms that commonly f
 
 ## References
 
-[1](https://www.plant-phenotyping.org/) IPPN, the International Plant Phenotyping Network, which hosts the Computer Vision Problems in Plant Phenotyping challenges and datasets.
+[1](https://www.plant-phenotyping.org/CVPPP2020) Computer Vision Problems in Plant Phenotyping
 
-[2](https://ieeexplore.ieee.org/document/7982753) Yin X, Liu X, Chen J, and Kramer DM. <i>Joint Multi-Leaf Segmentation, Alignment, and Tracking for Fluorescence Plant Videos</i>. 2018. IEEE Transactions on Pattern Analysis and Machine Intelligence.
+[2](https://github.com/xiyinmsu/PlantVision) PlantVision Github Repository
 
-[3](https://github.com/xiyinmsu/PlantVision) PlantVision Github Repository
+[3](https://ieeexplore.ieee.org/document/7982753) Yin X, Liu X, Chen J, and Kramer DM. <i>Joint Multi-Leaf Segmentation, Alignment, and Tracking for Fluorescence Plant Videos</i>. 2018. IEEE Transactions on Pattern Analysis and Machine Intelligence.
 
-[4](https://openaccess.thecvf.com/content_CVPRW_2019/papers/CVPPP/Kuznichov_Data_Augmentation_for_Leaf_Segmentation_and_Counting_Tasks_in_Rosette_CVPRW_2019_paper.pdf) Kuznichov et. al. 2019
+[4](https://openaccess.thecvf.com/content_CVPRW_2019/papers/CVPPP/Kuznichov_Data_Augmentation_for_Leaf_Segmentation_and_Counting_Tasks_in_Rosette_CVPRW_2019_paper.pdf) Kuznichov D, Zvirin A, Honen Y, and Kimmel R. <i>Data Augmentation for Leaf Segmentation and Counting Tasks in Rosette Plants.</i> 2019. The Computer Vision Foundation
+
+[5](https://github.com/matterport/Mask_RCNN) Matterport Github Repository for Mask R-CNN
+
+[6](https://link.springer.com/chapter/10.1007/978-3-319-16220-1_5) Pape JM and Klukas C. <i>3-D Histogram-Based Segmentation and Leaf Detection for Rosette Plants.</i> 2015. ECCV 2014. Springer. pp. 61-74.
+
+[7](https://plantidentifier.info/) LeafSnap application webpage
+
+[8](https://www.plant-phenotyping.org/datasets-home) CVPPP2017 Dataset
+
+[9](https://elifesciences.org/articles/06100) Ute Kramer. <i>The Natural History of Model Organisms: Planting molecular functions in an ecological context with Arabidopsis thaliana.</i> 2015. 
+
+[10](https://www.tandfonline.com/doi/pdf/10.1626/pps.15.293) Shibayama M, Sakamoto T, Takada E, Inoue A, Morita K, Yamaguchi T, Takahashi W and Kimura A. <i>Estimating Rice Leaf Greenness (SPAD) Using Fixed-Point Continuous Observations of Visible Red and Near Infrared Narrow-Band Digital Images</i> 2012. Plant Production Science. pp. 293-309.
+
+[11](https://ieeexplore.ieee.org/document/8237584) He K, Gkioxari G, Dollár P, and Girshick R. <i>Mask R-CNN.</i> 2017. IEEE.
 
 
 ## Resources:
