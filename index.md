@@ -115,8 +115,6 @@ To address the noise in resulting masks of the per-pixel logistic regression, bi
 
 In some cases, smoothing and denoising resulted in strange artifacts, and led to a higher number of falsely identified plant pixels.
 
--- failure photo --
-
 ## Results
 
 We analyzed our results by assigning a [Jaccard Index](https://en.wikipedia.org/wiki/Jaccard_index) to each image. The Jaccard Index, also known as intersection over union, compares the binary mask output of each algorithm and compares them to the ground truth masks. 
