@@ -1,21 +1,12 @@
 ## Plant Segmentation Final Project for CS 639 Computer Vision
 ### Marianne Bjorner and Carter Sifferman
 
-[Github Repository](https://github.com/cpsiff/plant-segmentation) / [Project Proposal](proposal.pdf) / [Midterm Report](midterm.pdf)
+[Github Repository](https://github.com/cpsiff/plant-segmentation) / [Project Proposal](proposal.pdf) / [Midterm Report](midterm.pdf) / 
+[Final Presentation](https://docs.google.com/presentation/d/1-RsaTUuVwnlHyvxS62lsLEATcr5Wvde78qQSAqw-udw/edit?usp=sharing)
 
-## Introduction
+## Introduction / Motivation
 
-Plant [Phenotyping](https://en.wikipedia.org/wiki/Phenotype) 
-
-....
-
-...
-
-..
-
-### Motivation
-
-Current methods used to assess plant growth in botany experiments are time-consuming and laborious. Using image segmentation techniques to replace manual plant measurements would increase automation and decrease needs for destructive sampling, thus decreasing cost.
+Current methods used to assess plant growth and [phenotype](https://en.wikipedia.org/wiki/Phenotype) in botany experiments are time-consuming and laborious. Using image segmentation techniques to replace manual plant measurements would increase automation and decrease needs for destructive sampling, thus decreasing labor and cost.
 
 Of those algorithms available, many have been developed and tested on datasets available from the European Conference on Computer Vision's [(ECCV)](https://eccv2020.eu/) workshop on Computer Vision Problems in Plant Phenotyping [(CVPPP)](https://www.plant-phenotyping.org/CVPPP2020). The dataset comprises overhead images of two species (of genera Arabidopsis and Nicotiana), commonly used as model organisms for botany and horticulture experiments. Given this limited dataset, we wanted to expand the range of available plant and image types to evaluate the differential performance of segmentation algorithms.
 
@@ -31,15 +22,11 @@ Of those algorithms available, many have been developed and tested on datasets a
 
 Existing approaches to the plant and leaf segmentation problem proposed by CVPPP include:
 
-- 
--
--
+- Yin et. al.'s [PlantVision](https://github.com/xiyinmsu/PlantVision), which performs joint multi-leaf segmentation on fluorescent plant images using template matching.
+- Kuznichov et. al.'s [Data Augmentation for Leaf Segmentation and Counting Tasks in Rosette Plants](https://openaccess.thecvf.com/content_CVPRW_2019/papers/CVPPP/Kuznichov_Data_Augmentation_for_Leaf_Segmentation_and_Counting_Tasks_in_Rosette_CVPRW_2019_paper.pdf), which segments and counts leaves using the [Matterport](https://github.com/matterport/Mask_RCNN) implementation of Mask R-CNN, a Convolutional Neural Network.
+- Pape and Klukas (2015) [3-D Histogram-Based Segmentation](https://link.springer.com/chapter/10.1007/978-3-319-16220-1_5) method which transforms RGB images into L* a* b* color space, and then generates separate 3-D histograms of the foreground and background for segmentation.
 
-Outside the realm of CVPPP, plant segmentation has also been explored in the context of plant identification.
-
--
--
--
+Outside the realm of CVPPP, plant leaf segmentation has also been explored in the context of plant identification. It has been integrated into apps such as [LeafSnap](https://plantidentifier.info/), in which individual leaf photos are used for species identification.
 
 ## [CVPPP2017 Dataset](https://www.plant-phenotyping.org/datasets-home)
 
@@ -94,7 +81,7 @@ Many obvious pitfalls occur when classifying leaves solely using a single green 
 
 K-means Clustering creates a set of k clusters of datapoints, or in this case pixels, which minimizes the within-cluster variance of the clusters in an iterative fashion until convergence is reached.  
 
-| RGB image | Ground Truth Binary Mask | Intermediate Result | K-Means Clustering Result |
+| RGB image | Ground Truth Binary Mask | Intermediate KMC Result | K-Means Clustering Result |
 | :---: | :---: | :---: | :---: |
 | <img src="photos/k-means/plant0418_rgb.png" alt="rgb image from CVPPP2017 dataset, ID 0418" width="200"/> | <img src="photos/k-means/plant0418_fg.png" alt="fg image from CVPPP2017 dataset, ID 0418" width="200"/> | <img src="photos/k-means/0418.png" alt="intermediate results of the k-means clustering algorithm" width="200"/> | <img src="photos/k-means/plant0418_kmc.png" alt="binary mask results of the k-means clustering algorithm" width="200"/> |
 
@@ -126,7 +113,7 @@ To address the noise in resulting masks of the per-pixel logistic regression, bi
 
 #### Difficulties Encountered / Caveats
 
-In some cases, smoothing and denoising resulted in strange artifacts.
+In some cases, smoothing and denoising resulted in strange artifacts, and led to a higher number of falsely identified plant pixels.
 
 -- failure photo --
 
@@ -149,17 +136,13 @@ Calculations of Jaccard Index and Dice Coefficient driven by [evalutate_segmenta
 
 ## Conclusions / Future Work
 
-Our methods focus on a pixel-by-pixel classification to segment plants from their background. This can be extended and refined through additional input image manipulation and binary mask refinement. However, it is important to aknowledge that as the parameters increase, so does the performance of a segmentation. These could include how well a leaf matches a template, angle between leaves, or distance between leaves in order to filter for true and false positives. While the present algorithm could easily be extended to track phenotypes related to size and green-ness of the plant [(a proxy for health and chlorophyll content)](https://www.tandfonline.com/doi/pdf/10.1626/pps.15.293), another datapoint of interest is also leaf number. With such additional parameters, individual leaf segmentation and tracking would also be possible. 
+Our methods focus on a pixelwise classification to segment plants from their backgrounds. This can be extended and refined through additional input image and binary mask manipulation. However, it is important to acknowledge that as the parameters increase, so does the performance of a segmentation. Additional local parameters could include brightness, texture, or position. Others which are specific to plant structure include correlation to a template, proximity to an edge, angle between leaves, or distance between leaves. While the present algorithm could easily be extended to track phenotypes related to size and green-ness of the plant [(a proxy for health and chlorophyll content)](https://www.tandfonline.com/doi/pdf/10.1626/pps.15.293), another datapoint of interest is also leaf number. 
 
-The current state-of-the-art includes high-performing algorithms that commonly fall above a Jaccard Index of 0.95. These utilize a...
+With such additional parameters, individual leaf segmentation and tracking would also be possible. Of the algorithms we implemented, k-means clustering was the most promising, as the clustering performed is analagous to leaf segmentation. Of course, there are other methods used for image segmentation such as [Mean](https://spin.atomicobject.com/2015/05/26/mean-shift-clustering/) [Shift](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.MeanShift.html).
 
-????
+Another approach would be to use feature detection methods to segment leaves, such as [SIFT](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_sift_intro/py_sift_intro.html).
 
-Of course, there are many other ways to approach this problem, such as through template matching, object recognition
-- using feature detection methods
-  - e.g. SIFT, blob detection with LoG and affine adaptations?
-- implement other algorithms:
-  - CNN
+The current state-of-the-art includes high-performing algorithms that commonly fall above a Jaccard Index of 0.95. These commonly utilize a convolutional neural network, such as that in Kuznichov et. al.'s [Data Augmentation for Leaf Segmentation and Counting Tasks in Rosette Plants](https://openaccess.thecvf.com/content_CVPRW_2019/papers/CVPPP/Kuznichov_Data_Augmentation_for_Leaf_Segmentation_and_Counting_Tasks_in_Rosette_CVPRW_2019_paper.pdf). This approach used the matterport implementation of [Mask R-CNN](https://ieeexplore.ieee.org/document/8237584), which is available on [Github](ttps://github.com/matterport/Mask_RCNN).
 
 ## References
 
@@ -167,18 +150,21 @@ Of course, there are many other ways to approach this problem, such as through t
 
 [2](https://ieeexplore.ieee.org/document/7982753) Yin X, Liu X, Chen J, and Kramer DM. <i>Joint Multi-Leaf Segmentation, Alignment, and Tracking for Fluorescence Plant Videos</i>. 2018. IEEE Transactions on Pattern Analysis and Machine Intelligence.
 
-[3](https://github.com/xiyinmsu/PlantVision) Original PlantVision code posted to Github.
+[3](https://github.com/xiyinmsu/PlantVision) PlantVision Github Repository
 
 [4](https://openaccess.thecvf.com/content_CVPRW_2019/papers/CVPPP/Kuznichov_Data_Augmentation_for_Leaf_Segmentation_and_Counting_Tasks_in_Rosette_CVPRW_2019_paper.pdf) Kuznichov et. al. 2019
 
-[Github Repository](https://github.com/cpsiff/plant-segmentation)
 
-[Project Proposal](proposal.pdf)
+## Resources:
 
-[Midterm Report](midterm.pdf)
+[1](https://github.com/cpsiff/plant-segmentation) Github Repository
 
-[Final Presentation](https://docs.google.com/presentation/d/1-RsaTUuVwnlHyvxS62lsLEATcr5Wvde78qQSAqw-udw/edit?usp=sharing)
+[2](proposal.pdf) Project Proposal
 
-[CVPPP2017 LSC Dataset](https://www.plant-phenotyping.org/datasets-home)
+[3](midterm.pdf) Midterm Report
+
+[4](https://docs.google.com/presentation/d/1-RsaTUuVwnlHyvxS62lsLEATcr5Wvde78qQSAqw-udw/edit?usp=sharing) Final Presentation
+
+[5](https://www.plant-phenotyping.org/datasets-home) CVPPP2017 LSC Dataset
 
 [Our Dataset](https://drive.google.com/drive/u/1/folders/1o7BMx_QDEMyHjWjvAFRqM-y4dL1PQiQE)
