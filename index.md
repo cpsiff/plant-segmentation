@@ -179,6 +179,8 @@ The current state-of-the-art includes high-performing algorithms that commonly f
 
 [4](https://docs.google.com/presentation/d/1-RsaTUuVwnlHyvxS62lsLEATcr5Wvde78qQSAqw-udw/edit?usp=sharing) Final Presentation
 
-[5](https://www.plant-phenotyping.org/datasets-home) CVPPP2017 LSC Dataset
+[5](https://www.youtube.com/watch?v=nfIE1cJPkbA&ab_channel=CarterSifferman) Final Presentation Video
 
-[Our Dataset](https://drive.google.com/drive/u/1/folders/1o7BMx_QDEMyHjWjvAFRqM-y4dL1PQiQE)
+[6](https://www.plant-phenotyping.org/datasets-home) CVPPP2017 LSC Dataset
+
+[7](https://drive.google.com/drive/u/1/folders/1o7BMx_QDEMyHjWjvAFRqM-y4dL1PQiQE) Our Dataset
